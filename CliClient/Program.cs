@@ -3,7 +3,11 @@ using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Sources;
-
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using iText.Kernel.Pdf;
+using iText.Kernel.Utils;
 
 namespace CliClient
 {
@@ -18,6 +22,8 @@ namespace CliClient
             public string excelPath { get; set; }
             [Option('o', "out", Required = true)]
             public string outputPath { get; set; }
+            [Option('m', "merge", Default = false)]
+            public bool merge { get; set; }
         }
         static void Main(string[] args)
         {
@@ -30,7 +36,7 @@ namespace CliClient
                 Console.WriteLine("Liste der Personen geöffnet");
                 for (int j = 1; j <= count; j++)
                 {
-                    var person = persons[j-1];
+                    var person = persons[j - 1];
                     Console.WriteLine("Person {0} von {1}: {2} {3}", j, count, person.Surname, person.Forename);
                     for (int i = 1; i <= o.amount; i++)
                     {
@@ -43,6 +49,29 @@ namespace CliClient
                         entry.CreatePdf(o.outputPath);
                         Console.WriteLine("PDF erstellt");
                     }
+                }
+                if (o.merge)
+                {
+                    Console.WriteLine("PDFs zusammenfügen");
+                    string[] f = Directory.GetFiles(o.outputPath);
+                    List<string> files = new List<string>(f);
+                    var documents = new List<PdfDocument>();
+                    Console.WriteLine($"Zusammenführen aller PDFs");
+                    foreach (var t in files)
+                    {
+                        documents.Add(new PdfDocument(new PdfReader(t)));
+
+                    }
+                    var merged = new PdfDocument(new PdfWriter(Path.Combine(o.outputPath, $"__Alle_Pdfs.pdf")));
+
+                    PdfMerger merger = new PdfMerger(merged);
+                    foreach (var document in documents)
+                    {
+                        merger.Merge(document, 1, document.GetNumberOfPages());
+                        document.Close();
+                    }
+                    merged.Close();
+                    Console.WriteLine($"PDFs zusammengeführt");
                 }
                 Console.WriteLine("Vorgang abgeschlossen");
             });

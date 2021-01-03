@@ -59,7 +59,7 @@ namespace Core
 
         public void CreatePdf(string outputFolder)
         {
-            string[] paths = { outputFolder, String.Format("{0}_{1}_{2}_{3}.pdf", RunNumber, Testee.Surname, Testee.Forename, ID),};
+            string[] paths = { outputFolder, String.Format("{0}_{1}_{2}_{3}.pdf", Testee.Surname, Testee.Forename, RunNumber, ID),};
             string fullPath = Path.Combine(paths);
             PdfDocument pdfDocument = new PdfDocument(new PdfWriter(new FileStream(fullPath, FileMode.Create, FileAccess.Write)));
             Document document = new Document(pdfDocument);
