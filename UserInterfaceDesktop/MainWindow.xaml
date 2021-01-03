@@ -9,23 +9,34 @@
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" FontSize="24"><Run Text="Covidtracker Bayern Bulk Creator"/><Run Text=" ("/><Run Text="covidtestbayern.sampletracker.eu)"/></TextBlock>
         <Label Content="Excelkonfiguration" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Excel_File" HorizontalAlignment="Left" Height="23" Margin="134,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263"/>
+        <TextBox x:Name="Excel_File" HorizontalAlignment="Left" Height="23" Margin="134,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" IsReadOnly="True"/>
         <Button x:Name="Button_Select_Excel_File" Content="Excel Datei auswählen" HorizontalAlignment="Left" Margin="406,101,0,0" VerticalAlignment="Top" Width="129" Click="Button_Select_Excel_Click">
 
         </Button>
-        <Label Content="Zielordner" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Target_Folder" HorizontalAlignment="Left" Height="23" Margin="134,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" TextChanged="Target_Folder_TextChanged"/>
-        <Label Content="Anzahl an Testungen" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="134,175,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="32" TextChanged="NumericTextBox_TextChanged" RenderTransformOrigin="-0.062,0.478"/>
-        <ProgressBar HorizontalAlignment="Left" Height="19" Margin="10,261,0,0" VerticalAlignment="Top" Width="772"/>
-        <RichTextBox HorizontalAlignment="Left" Height="139" Margin="10,298,0,0" VerticalAlignment="Top" Width="772" TextChanged="RichTextBox_TextChanged" VerticalScrollBarVisibility="Auto" IsReadOnly="True">
+        <Label Content="Anzahl an Testungen" HorizontalAlignment="Left" Margin="10,136,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Amount" HorizontalAlignment="Left" Height="23" Margin="134,140,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="32" RenderTransformOrigin="-0.062,0.478" PreviewTextInput="TextBox_OnPreviewTextInput"/>
+        <ProgressBar x:Name="Progress" HorizontalAlignment="Left" Height="19" Margin="10,261,0,0" VerticalAlignment="Top" Width="772">
+            <!--<ProgressBar.Triggers>
+                <EventTrigger RoutedEvent="ProgressBar.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                Storyboard.TargetName="Progress" 
+                Storyboard.TargetProperty="Value"
+                From="0" To="100" Duration="0:0:5"  />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </ProgressBar.Triggers>-->
+        </ProgressBar>
+        <RichTextBox x:Name="DisplayLog" HorizontalAlignment="Left" Height="139" Margin="10,298,0,0" VerticalAlignment="Top" Width="772" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Block.LineHeight="2">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="RichTextBox"/>
+                    <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <Button x:Name="Generate_Button" Content="Erstellen" HorizontalAlignment="Left" Margin="134,213,0,0" VerticalAlignment="Top" Width="263" Click="Button_Click"/>
+        <Button x:Name="Generate_Button" Content="Erstellen" HorizontalAlignment="Left" Margin="134,178,0,0" VerticalAlignment="Top" Width="263" Click="Generate_Button_Click"/>
 
     </Grid>
 </Window>
