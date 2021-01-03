@@ -1,0 +1,23 @@
+﻿<Window x:Class="UserInterfaceDesktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UserInterfaceDesktop"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" FontSize="24"><Run Text="Covidtracker Bayern Bulk Creator"/><Run Text=" ("/><Run Text="covidtestbayern.sampletracker.eu)"/></TextBlock>
+        <Label Content="Excelkonfiguration" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Excel_File" HorizontalAlignment="Left" Height="23" Margin="123,101,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="263"/>
+        <Button x:Name="Button_Select_Excel_File" Content="Excel Datei auswählen" HorizontalAlignment="Left" Margin="406,101,0,0" VerticalAlignment="Top" Width="129" Click="Button_Select_Excel_Click">
+           
+        </Button>
+        <Label Content="Zielordner" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Target_Folder" HorizontalAlignment="Left" Height="23" Margin="123,136,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="263"/>
+        <Button x:Name="Button_Select_Target_Folder" Content="Zielordner auswählen" HorizontalAlignment="Left" Margin="406,136,0,0" VerticalAlignment="Top" Width="129" Click="Button_Select_Target_Folder_Click"/>
+        <Label Content="Anzahl an Testungen" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="134,174,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="78" TextChanged="NumericTextBox_TextChanged"/>
+
+    </Grid>
+</Window>
