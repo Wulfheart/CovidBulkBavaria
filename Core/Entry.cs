@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Core
@@ -50,15 +51,15 @@ namespace Core
             form.Add(new StringContent(Testee.Country), "land1");
             form.Add(new StringContent(Testee.GSA), "gsa");
             form.Add(new StringContent(Testee.CoronaApp), "coronaapp1");
-            var response = await client.PostAsync(@"https://covidtestbayern.sampletracker.eu/gateway.php", form);
+            var response = client.PostAsync(@"https://covidtestbayern.sampletracker.eu/gateway.php", form).Result;
             response.EnsureSuccessStatusCode();
-            var content = await response.Content.ReadAsStringAsync();
-            ID = content;
+            var content = response.Content.ReadAsStringAsync().Result;
+            ID = Regex.Replace(content, @"\s+", "");
         }
 
         public void CreatePdf(string outputFolder)
         {
-            string[] paths = { outputFolder, String.Format("{0}_{1}_{2}_{3}", RunNumber, ID, Testee.Surname, Testee.Forename)};
+            string[] paths = { outputFolder, String.Format("{0}_{1}_{2}_{3}.pdf", RunNumber, Testee.Surname, Testee.Forename, ID),};
             string fullPath = Path.Combine(paths);
             PdfDocument pdfDocument = new PdfDocument(new PdfWriter(new FileStream(fullPath, FileMode.Create, FileAccess.Write)));
             Document document = new Document(pdfDocument);
@@ -71,7 +72,7 @@ namespace Core
 
             PdfFormXObject bobject = b.CreateFormXObject(pdfDocument);
             BarcodeQRCode qr = new BarcodeQRCode(ID);
-            document.Add(new Paragraph(String.Format("{0} {1} {2}", Testee.Surname, Testee.Surname, Testee.Birthday.ToString("yyyy-MM-dd"))).SetFontSize(25).SetPaddingBottom(10));
+            document.Add(new Paragraph(String.Format("{0} {1} {2}", Testee.Surname, Testee.Forename, Testee.Birthday.ToString("yyyy-MM-dd"))).SetFontSize(25).SetPaddingBottom(10));
             document.Add(new Paragraph("ID:"));
             document.Add(new Paragraph(ID).SetFontSize(40));
             document.Add(new Paragraph("ID NICHT DOPPELT SCANNEN").SetFontColor(ColorConstants.RED).SetBold().SetPaddingBottom(20));

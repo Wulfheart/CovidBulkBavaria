@@ -37,21 +37,14 @@ namespace UserInterfaceDesktop
             
         }
 
-        private void Button_Select_Target_Folder_Click(object sender, RoutedEventArgs e)
-        {
-            
-            OpenFileDialog dlg = new OpenFileDialog();
-            
-            bool? result = dlg.ShowDialog();
-            if (result == true)
-            {
-                Excel_File.Text = dlg.SafeFileName;
-            }
-        }
 
         private void NumericTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
+
+       
+
+        
     }
 }

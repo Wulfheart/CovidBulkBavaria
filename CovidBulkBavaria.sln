@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "TestConsole\TestConsole.csproj", "{38D3EA5B-0C2B-4E95-8B73-79BCAE5892C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterfaceDesktop", "UserInterfaceDesktop\UserInterfaceDesktop.csproj", "{9046B1B0-3EF9-4886-A810-E827DD7496C8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{48A2FEC1-A8BC-4AFA-8AA7-E6AAE27DC983} = {48A2FEC1-A8BC-4AFA-8AA7-E6AAE27DC983}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CliClient", "CliClient\CliClient.csproj", "{2C94E353-6924-4FE5-935F-1512B8F0BADD}"
 EndProject
