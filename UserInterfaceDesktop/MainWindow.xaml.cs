@@ -25,6 +25,7 @@ namespace UserInterfaceDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        protected string output {get; set;}
         public MainWindow()
         {
             InitializeComponent();
@@ -87,6 +88,7 @@ namespace UserInterfaceDesktop
                 {
                     // Save document
                     string outPutPath = dlg.FileName;
+                    output = outPutPath;
                     AddToLog($"Einlesen der Exceldatei von {excelPath}");
                     List<Testee> persons = ExcelParser.Parse(excelPath);
                     AddToLog("Exceldatei erfolgreich eingelesen");
@@ -126,7 +128,11 @@ namespace UserInterfaceDesktop
             }
             catch (Exception ex)
             {
-
+                Progress.Value = 0;
+                Progress.IsIndeterminate = false;
+                AddToLog(ex.Message);
+                AddToLog($"Löschen der beschädigten PDF-Datei unter {output}");
+                File.Delete(output);
                 MessageBox.Show(ex.Message + "\r");
             }
         }

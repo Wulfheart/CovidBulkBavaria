@@ -41,7 +41,7 @@ namespace UserInterfaceDesktop
             form.Add(new StringContent(Testee.Birthday.Day.ToString()), "birstday1");
             form.Add(new StringContent(Testee.Birthday.Month.ToString()), "birstday2");
             form.Add(new StringContent(Testee.Birthday.Year.ToString()), "birstday3");
-            form.Add(new StringContent(Testee.Gender == GenderEnum.MALE ? "M" : "W"), "geschlecht");
+            form.Add(new StringContent(Testee.Gender), "geschlecht");
             form.Add(new StringContent(Testee.Forename), "vorname");
             form.Add(new StringContent(Testee.Surname), "nachname");
             form.Add(new StringContent(Testee.Email), "email1");
@@ -60,13 +60,7 @@ namespace UserInterfaceDesktop
 
         public void CreatePdf(PdfDocument pdfDocument, Document document, bool isLast)
         {
-            //string[] paths = { outputFolder, String.Format("{0}_{1}_{2}_{3}.pdf", Testee.Surname, Testee.Forename, RunNumber, ID),};
-            //string fullPath = Path.Combine(paths);
-            //PdfDocument pdfDocument = new PdfDocument(new PdfWriter(new FileStream(fullPath, FileMode.Create, FileAccess.Write)));
-            //Document document = new Document(pdfDocument);
-
-            //String line = "Hello! Welcome to iTextPdf";
-            //document.Add(new Paragraph(line));
+            document.SetLeftMargin(100);
             Barcode128 b = new Barcode128(pdfDocument);
             b.SetCodeType(Barcode128.CODE128);
             b.SetCode(ID);
