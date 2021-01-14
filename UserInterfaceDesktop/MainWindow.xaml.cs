@@ -87,6 +87,9 @@ namespace UserInterfaceDesktop
                 if (result == true)
                 {
                     // Save document
+                    Generate_Button.IsEnabled = false;
+                    Button_Select_Excel_File.IsEnabled = false;
+                    Amount.IsEnabled = false;
                     string outPutPath = dlg.FileName;
                     output = outPutPath;
                     AddToLog($"Einlesen der Exceldatei von {excelPath}");
@@ -124,6 +127,9 @@ namespace UserInterfaceDesktop
                     AddToLog($"PDF erstellt unter {outPutPath}");
                     MessageBox.Show($"Vorgang abgeschlossen.\nPDF erstellt unter {outPutPath}");
                     Progress.Value = 0;
+                    Generate_Button.IsEnabled = true;
+                    Button_Select_Excel_File.IsEnabled = true;
+                    Amount.IsEnabled = true;
 
                 }
             }
@@ -135,6 +141,9 @@ namespace UserInterfaceDesktop
                 AddToLog($"Löschen der beschädigten PDF-Datei unter {output}");
                 File.Delete(output);
                 MessageBox.Show(ex.Message + "\r");
+                Generate_Button.IsEnabled = true;
+                Button_Select_Excel_File.IsEnabled = true;
+                Amount.IsEnabled = true;
             }
         }
 
