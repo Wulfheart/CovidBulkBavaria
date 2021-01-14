@@ -19,9 +19,26 @@ namespace UserInterfaceDesktop
             var p = new ExcelPackage(fi);
             var ws = p.Workbook.Worksheets["Personen"];
             List<Testee> persons = new List<Testee>();
+
             for (int i = ws.Dimension.Start.Row + 1; i <= ws.Dimension.End.Row; i++)
             {
-                string gender = ws.Cells[i, 3].Text;
+                // Empty line make sometimes problems
+                bool stop = true;
+                for (int j = 1; j <= 13; j++)
+                {
+                    if (!String.IsNullOrWhiteSpace(ws.Cells[i, j].Text))
+                    {
+                        stop = false;
+                        break;
+                    }
+                }
+                if (stop)
+                {
+                    continue;
+                }
+
+                // Here is the old code
+                string gender = ws.Cells[i, 3].Text.Trim()[0].ToString().ToUpper();
                 if (!Array.Exists(AllowedGenders, e => String.Equals(gender, e, StringComparison.OrdinalIgnoreCase)))
                 {
                     throw new Exception($"Fehler in Zeile {i}: Das Geschlecht wurde nicht erkannt. Es wird nur M und W unterstützt.");

@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "CliClient": {
-      "commandName": "Project",
-      "commandLineArgs": "-o \"C:\\Users\\Alex\\source\\repos\\CovidBulkBavaria\\TestRun\\PDFs\" -x \"C:\\Users\\Alex\\source\\repos\\CovidBulkBavaria\\TestRun\\Mitarbeiter.xlsx\" -a 4 --merge"
-    }
-  }
-}

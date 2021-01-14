@@ -122,6 +122,7 @@ namespace UserInterfaceDesktop
                     }
                     document.Close();
                     AddToLog($"PDF erstellt unter {outPutPath}");
+                    MessageBox.Show($"Vorgang abgeschlossen.\nPDF erstellt unter {outPutPath}");
                     Progress.Value = 0;
 
                 }
