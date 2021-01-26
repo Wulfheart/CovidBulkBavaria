@@ -21,7 +21,7 @@ namespace UserInterfaceDesktop
         public string CoronaApp { get; } = "0";
         public string Symptoms { get; set; }
         public string FirstTest { get; set; }
-        public string TestReason { get; } = "0";
+        public string TestReason { get; } = "14";
         public string VAufendhalt3 { get; } = "2021";
         public string BAufendhalt3 { get; } = "2021";
         public int Line { get; set; }
